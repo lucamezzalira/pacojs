@@ -99,7 +99,7 @@ header h2 {
 }
 
 #downloads {
-  margin-top: 100px;
+  margin-top: 40px;
   margin-bottom: 10px;
 }
 
@@ -111,9 +111,9 @@ header h2 {
 
 .headerTitle{
 
-    position: relative;
-    bottom: 0;
-    left: 0;
+    float: center;
+    padding-top: 40px;
+    padding-left: 200px;
 
 }
 
