@@ -31,6 +31,7 @@ module.exports = yeoman.generators.Base.extend({
         this.mkdir(projectFolder + "/resources");
         this.mkdir(projectFolder + "/dest");
         this.mkdir(projectFolder + "/metrics");
+        this.mkdir(projectFolder + "/test");
     },
     
     copyTemplates: function(){

@@ -1,7 +1,3 @@
-/**
- * Created by luca.mezzalira on 25/07/2014.
- */
-
 module.exports = function(grunt) {
 
     grunt.initConfig({
