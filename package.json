@@ -1,0 +1,39 @@
+{
+  "name": "generator-pacojs",
+  "version": "1.0.0",
+  "description": "the best friend of the Agile developer",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucamezzalira/pacojs.git"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "generator",
+    "static-analysis",
+    "code-analysis",
+    "analysis",
+    "agile",
+    "tools",
+    "tdd",
+    "testing",
+    "bdd"
+  ],
+  "author": {
+    "name" : "Luca Mezzalira",
+    "email" : "mezzalab@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucamezzalira/pacojs/issues"
+  },
+  "dependencies": {
+    "yeoman-generator": "latest",
+    "grunt": "latest",
+    "grunt-cli": "latest",
+    "grunt-contrib-uglify" : "latest"
+  },
+  "homepage": "http://pacojs.com"
+}
