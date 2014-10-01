@@ -1,6 +1,5 @@
 'use strict';
 var yeoman = require('yeoman-generator');
-var fse = require("fs-extra");
 var exec = require('child_process').exec;
 
 var projectFolder, library, testLibrary;
