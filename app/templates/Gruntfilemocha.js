@@ -2,7 +2,23 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-
+        plato: {
+            static_analysis: {
+              files: {
+                'metrics': ['src/**/*.js', 'test/**/*.js']
+              }
+            }
+          },
+        jshint: {
+            options: {
+              curly: true,
+              eqeqeq: true,
+              eqnull: true,
+              unused: true,
+              browser: true
+            },
+            uses_defaults: ['src/**/*.js', 'test/**/*.js'],
+          },
         uglify: {
             options: {
                 mangle: true,
@@ -22,19 +38,13 @@ module.exports = function(grunt) {
                     'dist/gs-core.min.js': ['dist/gs-core.js']
                 }
             }
-        },
-        browserify: {
-            dist: {
-                files: {
-                    'dist/gs-core.js': ['src/*.js']
-                }
-            }
         }
     });
 
+    grunt.loadNpmTasks('grunt-plato');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-browserify');
 
-    grunt.registerTask('default', ['browserify', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'plato']);
 
 };

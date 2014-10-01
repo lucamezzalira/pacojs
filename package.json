@@ -33,6 +33,7 @@
     "yeoman-generator": "latest",
     "grunt": "latest",
     "grunt-cli": "latest",
+    "fs-extra": "latest",
     "grunt-contrib-uglify" : "latest"
   },
   "homepage": "http://pacojs.com"

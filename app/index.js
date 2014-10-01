@@ -1,11 +1,12 @@
+'use strict';
 var yeoman = require('yeoman-generator');
 var fse = require("fs-extra");
 var exec = require('child_process').exec;
 
-var projectFolder;
+var projectFolder, library, testLibrary;
 
 module.exports = yeoman.generators.Base.extend({
-    
+
     askProjectName: function () {
         var done = this.async();
         this.prompt({
@@ -15,32 +16,49 @@ module.exports = yeoman.generators.Base.extend({
             default : 'MyJsProject'
         }, function (answers) {
             projectFolder = answers.name;
-            if(!fse.existsSync(answers.name)){
-                fse.mkdirSync(answers.name);
-            } else {
-                this.log("this folder already exists please chose another name");
-                return
+            this.mkdir(projectFolder);
+            this.destinationRoot(projectFolder);
+            done();
+        }.bind(this));
+    },
+
+    askTestingLibrary: function () {
+        var done = this.async();
+        this.prompt({
+            type    : 'list',
+            choices : ["mocha", "jasmine"],
+            name    : 'library',
+            message : 'Choose your test library',
+            default : 'mocha'
+        }, function (answers) {
+            testLibrary = answers.library;
+            if(testLibrary === "jasmine"){
+                library = "grunt-contrib-jasmine";
+            } else if (testLibrary === "mocha"){
+                library = "grunt-mocha";
             }
             done();
         }.bind(this));
     },
-    
+
     createFoldersStructure: function(){
-        this.mkdir(projectFolder + "/src");
-        this.mkdir(projectFolder + "/libs");
-        this.mkdir(projectFolder + "/resources");
-        this.mkdir(projectFolder + "/dest");
-        this.mkdir(projectFolder + "/metrics");
-        this.mkdir(projectFolder + "/test");
+        this.mkdir("libs");
+        this.mkdir("resources");
+        this.mkdir("dist");
+        this.mkdir("docs");
+        this.mkdir("src");
+        this.mkdir("metrics");
+        this.mkdir("test");
     },
-    
-    copyTemplates: function(){
-        this.copy('Gruntfile.js', projectFolder + '/Gruntfile.js');
-        this.copy('package.json', projectFolder + '/package.json');
-    },
-    
+
     downloadDependencies: function(){
-//        this.spawnCommand('cd', [projectFolder]);
+         var done = this.async();
+         this.npmInstall([library, 'grunt', 'grunt-cli', 'grunt-plato', 'grunt-karma', 'grunt-istanbul', 'grunt-jsdoc', 'grunt-contrib-watch', 'grunt-contrib-jshint'], { 'saveDev': true }, done);
+    },
+
+    copyTemplates: function(){
+       this.copy('Gruntfile'+ testLibrary +'.js', 'Gruntfile.js');
+       this.copy('package'+ testLibrary +'.json', 'package.json');
+       this.copy('index.html', 'index.html');
     }
-    
 });

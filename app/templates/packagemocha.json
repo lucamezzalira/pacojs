@@ -11,11 +11,18 @@
     "url": "git@github.gamesys.co.uk:game-studios-core/gs-core.git"
   },
   "keywords": [],
-  "author": "Paco.js"
+  "author": "Paco.js",
   "dependencies": {
     "grunt": "latest",
     "grunt-cli": "latest",
-    "grunt-contrib-uglify" : "latest"
+    "grunt-plato": "latest",
+    "grunt-karma": "latest",
+    "grunt-istanbul": "latest",
+    "grunt-jsdoc": "latest",
+    "grunt-contrib-uglify" : "latest",
+    "grunt-contrib-concat" : "latest",
+    "grunt-contrib-jshint" : "latest",
+    "grunt-contrib-watch": "latest"
   },
   "license": "ISC"
 }
