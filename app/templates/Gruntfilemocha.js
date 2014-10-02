@@ -8,7 +8,7 @@ module.exports = function(grunt) {
                 'metrics': ['src/**/*.js', 'test/**/*.js']
               }
             }
-          },
+        },
         jshint: {
             options: {
               curly: true,
@@ -18,33 +18,31 @@ module.exports = function(grunt) {
               browser: true
             },
             uses_defaults: ['src/**/*.js', 'test/**/*.js'],
-          },
-        uglify: {
-            options: {
-                mangle: true,
-                beautify: true,
-                drop_console: true,
-                compress: true,
-                sourceMap: true,
-                report: 'min',
-                banner: '/*\n' +
-                    ' * <%= pkg.name %>\n' +
-                    ' * v<%= pkg.version %>\n' +
-                    ' * <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-                    ' **/\n'
-            },
-            my_target: {
-                files: {
-                    'dist/gs-core.min.js': ['dist/gs-core.js']
-                }
+        },
+        jsdoc: {
+            dist : {
+                src: ['src/**/*.js'],
+                dest: 'docs'
+            }
+        },
+        watch: {
+            livereload: {
+              options: {
+                livereload: 35729 
+              },
+              files: ['index.html', 'dist/**/*.*'],
             }
         }
+        
     });
 
     grunt.loadNpmTasks('grunt-plato');
+    grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['jshint', 'plato']);
+    grunt.registerTask('default', ['watch', 'jshint', 'plato']);
+    grunt.registerTask('docs', ['jsdoc']);
+    grunt.registerTask('analysis', ['jshint', 'plato']);
 
 };

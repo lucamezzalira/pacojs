@@ -25,7 +25,7 @@ module.exports = yeoman.generators.Base.extend({
         var done = this.async();
         this.prompt({
             type    : 'list',
-            choices : ["mocha", "jasmine"],
+            choices : ["mocha", "jasmine", "none"],
             name    : 'library',
             message : 'Choose your test library',
             default : 'mocha'
@@ -35,6 +35,10 @@ module.exports = yeoman.generators.Base.extend({
                 library = "grunt-contrib-jasmine";
             } else if (testLibrary === "mocha"){
                 library = "grunt-mocha";
+            } else {
+                library = "";
+                this.log("Paco.js is not adding any test framework to your new project!");
+                this.log("==========================================================================");
             }
             done();
         }.bind(this));
@@ -51,13 +55,19 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     downloadDependencies: function(){
-         var done = this.async();
-         this.npmInstall([library, 'grunt', 'grunt-cli', 'grunt-plato', 'grunt-karma', 'grunt-istanbul', 'grunt-jsdoc', 'grunt-contrib-watch', 'grunt-contrib-jshint'], { 'saveDev': true }, done);
+        this.log("Paco.js is going to download all the dependencies, so please be patient... :D");
+        this.log("==========================================================================");
+        var dependencies = ['grunt', 'grunt-cli', 'grunt-plato', 'karma', 'grunt-karma', 'istanbul ', 'grunt-istanbul', 'git+https://github.com/jsdoc3/jsdoc.git', 'grunt-jsdoc', 'grunt-contrib-watch', 'grunt-contrib-jshint'];
+        if (library !== "")
+            dependencies.push(library);
+        var done = this.async();
+        this.npmInstall(dependencies, { 'saveDev': true }, done);
     },
 
     copyTemplates: function(){
        this.copy('Gruntfile'+ testLibrary +'.js', 'Gruntfile.js');
        this.copy('package'+ testLibrary +'.json', 'package.json');
        this.copy('index.html', 'index.html');
+       this.copy('livereload.js', 'libs/livereload.js');
     }
 });
