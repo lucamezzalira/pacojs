@@ -1,4 +1,4 @@
 pacojs
 ======
 
-the best friend of an Agile Javascript developer
+the best friend of any Javascript developer
