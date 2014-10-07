@@ -30,17 +30,12 @@ module.exports = function(grunt) {
               options: {
                 livereload: true
               },
-              files: ['index.html', 'src/**/*.*', "resources/**/*.*", "test/**/*.*"],
-              tasks: ['jssemicoloned','jshint', 'mocha', 'plato']
+              files: ['index.html', 'src/**/*.*', "resources/**/*.*"],
+              tasks: ['jssemicoloned','jshint', 'plato']
             }
         },
         jssemicoloned: {
             files: ['./src/**/*.js', './test/**/*.js']
-        },
-        mocha: {
-          test: {
-            src: ['test/**/*.html'],
-          },
         }
     });
 
@@ -49,11 +44,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-jssemicoloned');
-    grunt.loadNpmTasks('grunt-mocha');
 
-    grunt.registerTask('default', ['jssemicoloned', 'watch', 'jshint', 'mocha', 'plato']);
+    grunt.registerTask('default', ['jssemicoloned', 'watch', 'jshint', 'plato']);
     grunt.registerTask('docs', ['jssemicoloned','jsdoc']);
     grunt.registerTask('analysis', ['jssemicoloned','jshint', 'plato']);
-    grunt.registerTask('tests', ['jssemicoloned', 'jshint', 'mocha']);
 
 };

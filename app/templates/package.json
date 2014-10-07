@@ -19,7 +19,6 @@
     "grunt-jsdoc": "latest",
     "grunt-contrib-jshint" : "latest",
     "grunt-contrib-watch": "latest",
-    "grunt-mocha": "latest",
     "grunt-jssemicoloned": "latest"
   },
   "license": "ISC"

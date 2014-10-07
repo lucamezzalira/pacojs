@@ -1,6 +1,5 @@
 'use strict';
 var yeoman = require('yeoman-generator');
-var exec = require('child_process').exec;
 
 var projectFolder, library, testLibrary;
 
@@ -37,7 +36,7 @@ module.exports = yeoman.generators.Base.extend({
                 library = "grunt-mocha";
             } else {
                 library = "";
-                this.log("Paco.js is not adding any test framework to your new project!");
+                this.log("Paco.js is not adding any test framework to your new project! :P");
                 this.log("==========================================================================");
             }
             done();
@@ -55,19 +54,25 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     downloadDependencies: function(){
-        this.log("Paco.js is going to download all the dependencies, so please be patient... :D");
+        this.log("Paco.js is going to download all the dependencies, so please be patient... :P");
         this.log("==========================================================================");
-        var dependencies = ['grunt', 'grunt-cli', 'grunt-plato', 'karma', 'grunt-karma', 'istanbul ', 'grunt-istanbul', 'git+https://github.com/jsdoc3/jsdoc.git', 'grunt-jsdoc', 'grunt-contrib-watch', 'grunt-contrib-jshint'];
-        if (library !== "")
+        var dependencies = ['grunt', 'grunt-cli', 'grunt-plato', 'mocha', 'jasmine', 'grunt-jssemicoloned', 'git+https://github.com/jsdoc3/jsdoc.git', 'grunt-jsdoc', 'grunt-contrib-watch', 'grunt-contrib-jshint'];
+        if (library !== ""){
             dependencies.push(library);
+        }
         var done = this.async();
         this.npmInstall(dependencies, { 'saveDev': true }, done);
     },
 
     copyTemplates: function(){
-       this.copy('Gruntfile'+ testLibrary +'.js', 'Gruntfile.js');
-       this.copy('package'+ testLibrary +'.json', 'package.json');
-       this.copy('index.html', 'index.html');
-       this.copy('livereload.js', 'libs/livereload.js');
+        if(library !== ""){
+           this.copy('Gruntfile'+ testLibrary +'.js', 'Gruntfile.js');
+           this.copy('package'+ testLibrary +'.json', 'package.json');
+        } else {
+           this.copy('Gruntfile.js', 'Gruntfile.js');
+           this.copy('package.json', 'package.json');
+        }
+
+        this.copy('index.html', 'index.html');
     }
 });
