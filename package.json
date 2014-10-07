@@ -1,7 +1,7 @@
 {
   "name": "generator-pacojs",
-  "version": "1.0.0",
-  "description": "the best friend of the Agile developer",
+  "version": "1.0.1",
+  "description": "the best friend of any Javascript developer",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
