@@ -56,9 +56,10 @@ module.exports = yeoman.generators.Base.extend({
     downloadDependencies: function(){
         this.log("Paco.js is going to download all the dependencies, so please be patient... :P");
         this.log("==========================================================================");
-        var dependencies = ['grunt', 'grunt-cli', 'grunt-plato', 'mocha', 'jasmine', 'grunt-jssemicoloned', 'git+https://github.com/jsdoc3/jsdoc.git', 'grunt-jsdoc', 'grunt-contrib-watch', 'grunt-contrib-jshint'];
+        var dependencies = ['grunt', 'grunt-cli', 'grunt-plato', 'bower', 'grunt-jssemicoloned', 'git+https://github.com/jsdoc3/jsdoc.git', 'grunt-jsdoc', 'grunt-contrib-watch', 'grunt-contrib-jshint'];
         if (library !== ""){
             dependencies.push(library);
+            dependencies.push(testLibrary);
         }
         var done = this.async();
         this.npmInstall(dependencies, { 'saveDev': true }, done);
@@ -74,5 +75,7 @@ module.exports = yeoman.generators.Base.extend({
         }
 
         this.copy('index.html', 'index.html');
+        this.copy('.bowerrc', '.bowerrc');
+        this.log("Thanks for use Paco.js (www.pacojs.com) :P");
     }
 });
